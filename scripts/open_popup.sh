@@ -16,4 +16,4 @@ fi
 tmux display-popup \
   -x "$X_POS" -y 0 \
   -w "20%" -h "100%" \
-  -E "lua '$SCRIPT_DIR/pi_status.lua' | less -R"
+  -E "lua '$SCRIPT_DIR/pi_status.lua' | less -sR"
