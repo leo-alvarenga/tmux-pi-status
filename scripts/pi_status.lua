@@ -14,9 +14,6 @@ end
 local W = tonumber(os.getenv("PI_STATUS_W") or "") or 34
 local CW = math.max(10, W - 2) -- popup border eats 1 column each side
 
--- ponytail: no wcwidth, byte-safe truncation only. Byte length is >= cell width, so a
--- line budgeted in bytes never overflows the popup; it may cut ~3 bytes early on a
--- multi-byte glyph. Call it only on plain text, never on a string with ANSI codes.
 local function fit(s, w)
 	w = math.max(4, w)
 	if #s <= w then
@@ -60,12 +57,17 @@ local function sessions_via_jq()
 	return out
 end
 
+local function hint()
+	io.write(indent(COLOR.DIM .. fit("Esc, C-c or q to close", CW - 2) .. COLOR.RESET .. "\n", 1))
+end
+
 local function main()
 	local sessions = sessions_via_jq()
 
 	if not sessions or #sessions == 0 then
 		io.write(indent(COLOR.DIM .. "No active sessions" .. COLOR.RESET .. "\n", 2))
 
+		hint()
 		os.exit(0)
 	end
 
@@ -99,6 +101,7 @@ local function main()
 	end
 
 	io.write("\n")
+	hint()
 end
 
 main()

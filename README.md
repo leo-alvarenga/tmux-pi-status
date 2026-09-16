@@ -5,7 +5,7 @@ Shows the sessions reported by
 in a tmux popup.
 
 `prefix + P` opens a sidebar next to your pane. It redraws once a second,
-`Escape` or `C-c` closes it.
+`Escape`, `C-c` or `q` closes it.
 
 ## Requirements
 
